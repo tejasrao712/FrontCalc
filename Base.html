@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.2/axios.min.js"></script>
+    <title>Calculator</title>
+</head>
+
+<body>
+
+    <p class="CALC" align="center">CALCULATOR</p>
+    <form class="parent">
+        Enter The First Number: <input class="form1" type="number" id="FirstNumber" /><br><br>
+        Enter the Second Number: <input class="form2" type="number" id="SecondNumber" /><br><br>
+        <div class="container">
+            <input class="button0" type="button" onclick="Addition()" value="Add">
+            <input class="button1" type="button" onclick="Subtraction()" value="Sub">
+            <input class="button1" type="button" onclick="Multiplication()" value="Mul">
+            <input class="button1" type="button" onclick="Division()" value="Div">
+        </div>
+    </form>
+    <p class="ans" align="center">ANSWER :
+        <span id="result"></span>
+    </p>
+</body>
+
+
+</html>
+<script>
+    // async function callMe(body) {
+    //     let calculationResult;
+    //     axios
+    //         .post('http://localhost:3000/api/calci/operate', body)
+    //         .then(response => {
+    //             calculationResult = response.data
+    //             console.log(`POST: user is added`,calculationResult.calciRes.result)
+
+    //         })
+    //         .catch(error => console.error(error))
+    //         return calculationResult.calciRes.result;
+    // }
+    async function Addition() {
+        num1 = document.getElementById("FirstNumber").value;
+        num2 = document.getElementById("SecondNumber").value;
+        const body = {
+            "first_num": parseInt(num1),
+            "last_num": parseInt(num2),
+            "operation": "add",
+        }
+        axios
+            .post('http://localhost:3000/api/calci/operate', body)
+            .then(response => {
+                const calculationResult = response.data
+                console.log(`Calculation Response`, calculationResult.calciRes.result)
+                document.getElementById("result").innerHTML = calculationResult.calciRes.result;
+            })
+            .catch(error => console.error(error))
+
+
+    }
+
+    async function Subtraction() {
+        num1 = document.getElementById("FirstNumber").value;
+        num2 = document.getElementById("SecondNumber").value;
+        const body = {
+            "first_num": num1,
+            "last_num": num2,
+            "operation": "Sub",
+        }
+        axios
+            .post('http://localhost:3000/api/calci/operate', body)
+            .then(response => {
+                const calculationResult = response.data
+                console.log(`Calculation Response`, calculationResult.calciRes.result)
+                document.getElementById("result").innerHTML = calculationResult.calciRes.result;
+            })
+            .catch(error => console.error(error))
+
+    }
+    async function Multiplication() {
+        num1 = document.getElementById("FirstNumber").value;
+        num2 = document.getElementById("SecondNumber").value;
+        const body = {
+            "first_num": num1,
+            "last_num": num2,
+            "operation": "Multi",
+        }
+        axios
+            .post('http://localhost:3000/api/calci/operate', body)
+            .then(response => {
+                const calculationResult = response.data
+                console.log(`Calculation Response`, calculationResult.calciRes.result)
+                document.getElementById("result").innerHTML = calculationResult.calciRes.result;
+            })
+            .catch(error => console.error(error))
+    }
+    //document.getElementById("result").innerHTML = num1 / num2;
+
+    async function Division() {
+        num1 = document.getElementById("FirstNumber").value;
+        num2 = document.getElementById("SecondNumber").value;
+        const body = {
+            "first_num": num1,
+            "last_num": num2,
+            "operation": "Div",
+        }
+        axios
+            .post('http://localhost:3000/api/calci/operate', body)
+            .then(response => {
+                const calculationResult = response.data
+                console.log(`Calculation Response`, calculationResult.calciRes.result)
+                document.getElementById("result").innerHTML = calculationResult.calciRes.result;
+            })
+            .catch(error => console.error(error))
+    }
+</script>
+<style>
+    .tab {
+        display: inline-block;
+        margin-left: 40px;
+
+    }
+
+    .parent {
+        padding-top: 10px;
+        padding-left: 30px;
+        width: 400px;
+        height: 200px;
+        tab-size: 30;
+        align-items: center;
+        font-family: sans-serif;
+        background-color: beige;
+
+    }
+
+    .button0 {
+        box-shadow: 10px;
+        text-align: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: 10px;
+        margin-right: 20px;
+        width: 58px;
+        height: 40px;
+        border-radius: 8px;
+        background-color: aquamarine;
+    }
+
+    .button1 {
+        box-shadow: 10px;
+        text-align: center;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        width: 58px;
+        height: 40px;
+        border-radius: 8px;
+        background-color: aquamarine;
+    }
+
+    body,
+    html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: table;
+    }
+
+    body {
+        display: table-cell;
+        vertical-align: middle;
+
+    }
+
+    form {
+        display: table;
+        margin: auto;
+    }
+
+    .form1 {
+        align-items: center;
+        padding: 10px;
+        padding-left: 10px;
+    }
+
+    .form2 {
+        padding: 10px;
+    }
+
+    .ans {
+        font-size: 60px;
+        font-weight: 200;
+        display: block;
+        align-content: center;
+    }
+
+    .CALC {
+        font-size: 100px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background-color: aquamarine;
+        font-weight: bold;
+    }
+
+    .container {
+        display: inline-flex;
+        font-size: 20px;
+        align-items: center;
+        width: 30px;
+        height: 20px;
+        padding-top: 10px;
+    }
+</style>
